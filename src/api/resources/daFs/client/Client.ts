@@ -56,7 +56,7 @@ export class DaFs {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                     "v1/dafs"
                 ),
                 method: "GET",
@@ -155,7 +155,7 @@ export class DaFs {
     public async get(id: string, requestOptions?: DaFs.RequestOptions): Promise<Chariot.Daf> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/dafs/${encodeURIComponent(id)}`
             ),
             method: "GET",

@@ -61,7 +61,7 @@ export class Events {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                     "v1/events"
                 ),
                 method: "GET",
@@ -180,7 +180,7 @@ export class Events {
     public async get(id: string, requestOptions?: Events.RequestOptions): Promise<Chariot.Event> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/events/${encodeURIComponent(id)}`
             ),
             method: "GET",

@@ -52,7 +52,7 @@ export class Nonprofits {
     public async getByEin(ein: string, requestOptions?: Nonprofits.RequestOptions): Promise<Chariot.Nonprofit> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/nonprofit/${encodeURIComponent(ein)}`
             ),
             method: "GET",
@@ -186,7 +186,7 @@ export class Nonprofits {
     ): Promise<Chariot.Nonprofit> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 "v1/nonprofits"
             ),
             method: "POST",
@@ -319,7 +319,7 @@ export class Nonprofits {
     public async getById(id: string, requestOptions?: Nonprofits.RequestOptions): Promise<Chariot.Nonprofit> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/nonprofits/${encodeURIComponent(id)}`
             ),
             method: "GET",

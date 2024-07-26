@@ -60,7 +60,7 @@ export class Grants {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                     "v1/unintegrated_grants"
                 ),
                 method: "GET",
@@ -193,7 +193,7 @@ export class Grants {
     ): Promise<Chariot.Grant> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 "v1/grants"
             ),
             method: "POST",
@@ -337,7 +337,7 @@ export class Grants {
     public async get(id: string, requestOptions?: Grants.RequestOptions): Promise<Chariot.UnintegratedGrant> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/unintegrated_grants/${encodeURIComponent(id)}`
             ),
             method: "GET",
@@ -466,7 +466,7 @@ export class Grants {
     ): Promise<Chariot.UnintegratedGrant> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/unintegrated_grants/${encodeURIComponent(id)}`
             ),
             method: "PATCH",
@@ -602,7 +602,7 @@ export class Grants {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 "v1/recurring_grants"
             ),
             method: "GET",
@@ -728,7 +728,7 @@ export class Grants {
     ): Promise<Chariot.RecurringGrant> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 "v1/recurring_grants"
             ),
             method: "POST",
@@ -878,7 +878,7 @@ export class Grants {
     ): Promise<Chariot.RecurringGrant> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/recurring_grants/${encodeURIComponent(id)}`
             ),
             method: "GET",

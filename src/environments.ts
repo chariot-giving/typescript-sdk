@@ -3,8 +3,8 @@
  */
 
 export const ChariotEnvironment = {
-    Sandbox: "https://sandboxapi.givechariot.com",
     Production: "https://api.givechariot.com",
+    Sandbox: "https://sandboxapi.givechariot.com",
 } as const;
 
-export type ChariotEnvironment = typeof ChariotEnvironment.Sandbox | typeof ChariotEnvironment.Production;
+export type ChariotEnvironment = typeof ChariotEnvironment.Production | typeof ChariotEnvironment.Sandbox;

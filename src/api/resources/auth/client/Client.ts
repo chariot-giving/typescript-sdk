@@ -47,7 +47,7 @@ export class Auth {
     ): Promise<Chariot.GetTokenResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 "oauth/token"
             ),
             method: "POST",

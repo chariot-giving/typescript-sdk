@@ -60,7 +60,7 @@ export class EventSubscriptions {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                     "v1/event_subscriptions"
                 ),
                 method: "GET",
@@ -185,7 +185,7 @@ export class EventSubscriptions {
     ): Promise<Chariot.EventSubscription> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 "v1/event_subscriptions"
             ),
             method: "POST",
@@ -310,7 +310,7 @@ export class EventSubscriptions {
     ): Promise<Chariot.EventSubscription> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/event_subscriptions/${encodeURIComponent(id)}`
             ),
             method: "GET",
@@ -436,7 +436,7 @@ export class EventSubscriptions {
     ): Promise<Chariot.EventSubscription> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
                 `v1/event_subscriptions/${encodeURIComponent(id)}`
             ),
             method: "PATCH",
