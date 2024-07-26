@@ -44,91 +44,97 @@ export class DaFs {
     public async list(
         request: Chariot.DaFsListRequest = {},
         requestOptions?: DaFs.RequestOptions
-    ): Promise<Chariot.DaFsListResponse> {
-        const { pageLimit, pageToken } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (pageLimit != null) {
-            _queryParams["pageLimit"] = pageLimit.toString();
-        }
-
-        if (pageToken != null) {
-            _queryParams["pageToken"] = pageToken;
-        }
-
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
-                "v1/dafs"
-            ),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot",
-                "X-Fern-SDK-Version": "0.0.1-alpha0",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-            },
-            contentType: "application/json",
-            queryParameters: _queryParams,
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return serializers.DaFsListResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
+    ): Promise<core.Page<Chariot.Daf>> {
+        const list = async (request: Chariot.DaFsListRequest): Promise<Chariot.DaFsListResponse> => {
+            const { pageLimit, pageToken } = request;
+            const _queryParams: Record<string, string | string[] | object | object[]> = {};
+            if (pageLimit != null) {
+                _queryParams["pageLimit"] = pageLimit.toString();
+            }
+            if (pageToken != null) {
+                _queryParams["pageToken"] = pageToken;
+            }
+            const _response = await (this._options.fetcher ?? core.fetcher)({
+                url: urlJoin(
+                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Sandbox,
+                    "v1/dafs"
+                ),
+                method: "GET",
+                headers: {
+                    Authorization: await this._getAuthorizationHeader(),
+                    "X-Fern-Language": "JavaScript",
+                    "X-Fern-SDK-Name": "chariot",
+                    "X-Fern-SDK-Version": "0.0.1-alpha0",
+                    "X-Fern-Runtime": core.RUNTIME.type,
+                    "X-Fern-Runtime-Version": core.RUNTIME.version,
+                },
+                contentType: "application/json",
+                queryParameters: _queryParams,
+                requestType: "json",
+                timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+                maxRetries: requestOptions?.maxRetries,
+                abortSignal: requestOptions?.abortSignal,
             });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Chariot.BadRequestError(
-                        serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                case 500:
-                    throw new Chariot.InternalServerError(
-                        serializers.Error_.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
+            if (_response.ok) {
+                return serializers.DaFsListResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                });
+            }
+            if (_response.error.reason === "status-code") {
+                switch (_response.error.statusCode) {
+                    case 400:
+                        throw new Chariot.BadRequestError(
+                            serializers.Error_.parseOrThrow(_response.error.body, {
+                                unrecognizedObjectKeys: "passthrough",
+                                allowUnrecognizedUnionMembers: true,
+                                allowUnrecognizedEnumValues: true,
+                                skipValidation: true,
+                                breadcrumbsPrefix: ["response"],
+                            })
+                        );
+                    case 500:
+                        throw new Chariot.InternalServerError(
+                            serializers.Error_.parseOrThrow(_response.error.body, {
+                                unrecognizedObjectKeys: "passthrough",
+                                allowUnrecognizedUnionMembers: true,
+                                allowUnrecognizedEnumValues: true,
+                                skipValidation: true,
+                                breadcrumbsPrefix: ["response"],
+                            })
+                        );
+                    default:
+                        throw new errors.ChariotError({
+                            statusCode: _response.error.statusCode,
+                            body: _response.error.body,
+                        });
+                }
+            }
+            switch (_response.error.reason) {
+                case "non-json":
                     throw new errors.ChariotError({
                         statusCode: _response.error.statusCode,
-                        body: _response.error.body,
+                        body: _response.error.rawBody,
+                    });
+                case "timeout":
+                    throw new errors.ChariotTimeoutError();
+                case "unknown":
+                    throw new errors.ChariotError({
+                        message: _response.error.errorMessage,
                     });
             }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ChariotError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ChariotTimeoutError();
-            case "unknown":
-                throw new errors.ChariotError({
-                    message: _response.error.errorMessage,
-                });
-        }
+        };
+        return new core.Pageable<Chariot.DaFsListResponse, Chariot.Daf>({
+            response: await list(request),
+            hasNextPage: (response) => response?.nextPageToken != null,
+            getItems: (response) => response?.results ?? [],
+            loadPage: (response) => {
+                return list(core.setObjectProperty(request, "pageToken", response?.nextPageToken));
+            },
+        });
     }
 
     /**

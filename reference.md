@@ -341,7 +341,7 @@ await client.connects.get("live_xJd0lUrvpDkzeGBWZbuI2wbvEdM");
 
 ## Grants
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">list</a>({ ...params }) -> Chariot.GrantsListResponse</code></summary>
+<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.UnintegratedGrant></code></summary>
 <dl>
 <dd>
 
@@ -819,7 +819,7 @@ await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
 
 ## DaFs
 
-<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">list</a>({ ...params }) -> Chariot.DaFsListResponse</code></summary>
+<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
 <dl>
 <dd>
 
@@ -949,7 +949,7 @@ await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 
 ## Events
 
-<details><summary><code>client.events.<a href="/src/api/resources/events/client/Client.ts">list</a>({ ...params }) -> Chariot.EventsListResponse</code></summary>
+<details><summary><code>client.events.<a href="/src/api/resources/events/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Event></code></summary>
 <dl>
 <dd>
 
@@ -1077,7 +1077,7 @@ await client.events.get("id");
 
 ## EventSubscriptions
 
-<details><summary><code>client.eventSubscriptions.<a href="/src/api/resources/eventSubscriptions/client/Client.ts">list</a>({ ...params }) -> Chariot.EventSubscriptionsListResponse</code></summary>
+<details><summary><code>client.eventSubscriptions.<a href="/src/api/resources/eventSubscriptions/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.EventSubscription></code></summary>
 <dl>
 <dd>
 
