@@ -18,7 +18,10 @@ Instantiate and use the client with the following:
 ```typescript
 import { ChariotClient } from "chariot";
 
-const client = new ChariotClient({ token: "YOUR_TOKEN" });
+const client = new ChariotClient({ 
+    clientId: "YOUR_CLIENT_ID",
+    clientSecret: "YOUR_CLIENT_SECRET",
+});
 await client.nonprofits.create({
     user: {
         email: "ben.give@co.com",
@@ -56,6 +59,36 @@ try {
         console.log(err.message);
         console.log(err.body);
     }
+}
+```
+
+## Automatic Pagination
+
+List endpoints are paginated. The SDK provides an iterator so that you 
+can simply loop over the items: 
+
+```ts
+const result = await client.events.list();
+for await (const event of result) {
+  console.log(event);
+}
+```
+
+You can also iterate page-by-page:
+
+```ts
+let page = await client.events.list();
+for (const event of page.data) {
+  console.log(event);
+}
+```
+
+or manually: 
+
+```ts
+while (page.hasNextPage()) {
+  page = page.getNextPage();
+  // ...
 }
 ```
 
