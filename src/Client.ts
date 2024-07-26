@@ -10,6 +10,7 @@ import { Grants } from "./api/resources/grants/client/Client";
 import { DaFs } from "./api/resources/daFs/client/Client";
 import { Events } from "./api/resources/events/client/Client";
 import { EventSubscriptions } from "./api/resources/eventSubscriptions/client/Client";
+import { Auth } from "./api/resources/auth/client/Client";
 
 export declare namespace ChariotClient {
     interface Options {
@@ -65,5 +66,11 @@ export class ChariotClient {
 
     public get eventSubscriptions(): EventSubscriptions {
         return (this._eventSubscriptions ??= new EventSubscriptions(this._options));
+    }
+
+    protected _auth: Auth | undefined;
+
+    public get auth(): Auth {
+        return (this._auth ??= new Auth(this._options));
     }
 }
