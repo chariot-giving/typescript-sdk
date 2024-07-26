@@ -3,7 +3,7 @@
  */
 
 export interface GetTokenResponse {
-    accessToken?: string;
-    tokenType?: string;
-    expiresIn?: number;
+    accessToken: string;
+    tokenType: string;
+    expiresIn: number;
 }

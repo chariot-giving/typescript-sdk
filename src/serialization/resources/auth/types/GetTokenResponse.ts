@@ -10,15 +10,15 @@ export const GetTokenResponse: core.serialization.ObjectSchema<
     serializers.GetTokenResponse.Raw,
     Chariot.GetTokenResponse
 > = core.serialization.object({
-    accessToken: core.serialization.property("access_token", core.serialization.string().optional()),
-    tokenType: core.serialization.property("token_type", core.serialization.string().optional()),
-    expiresIn: core.serialization.property("expires_in", core.serialization.number().optional()),
+    accessToken: core.serialization.property("access_token", core.serialization.string()),
+    tokenType: core.serialization.property("token_type", core.serialization.string()),
+    expiresIn: core.serialization.property("expires_in", core.serialization.number()),
 });
 
 export declare namespace GetTokenResponse {
     interface Raw {
-        access_token?: string | null;
-        token_type?: string | null;
-        expires_in?: number | null;
+        access_token: string;
+        token_type: string;
+        expires_in: number;
     }
 }

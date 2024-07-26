@@ -59,36 +59,6 @@ try {
 }
 ```
 
-## Automatic Pagination
-
-List endpoints are paginated. The SDK provides an iterator so that you 
-can simply loop over the items: 
-
-```ts
-const result = await client.events.list();
-for await (const event of result) {
-  console.log(event);
-}
-```
-
-You can also iterate page-by-page:
-
-```ts
-let page = await client.events.list();
-for (const event of page.data) {
-  console.log(event);
-}
-```
-
-or manually: 
-
-```ts
-while (page.hasNextPage()) {
-  page = page.getNextPage();
-  // ...
-}
-```
-
 ## Advanced
 
 ### Retries
