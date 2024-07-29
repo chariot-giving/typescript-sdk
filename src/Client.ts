@@ -14,7 +14,7 @@ import { Auth } from "./api/resources/auth/client/Client";
 
 export declare namespace ChariotClient {
     interface Options {
-        environment?: core.Supplier<environments.ChariotEnvironment | string>;
+        environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
