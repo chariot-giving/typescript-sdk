@@ -1,8 +1,8 @@
-import { Auth } from "api/resources/auth/client/Client";
+import { Auth } from "../api/resources/auth/client/Client";
 import { ChariotClient as FernClient } from "../Client";
 import * as core from "../core";
 import * as environments from "../environments";
-import { OAuthTokenProvider } from "core/auth/OAuthTokenProvider";
+import { OAuthTokenProvider } from "../core/auth/OAuthTokenProvider";
 
 export declare namespace ChariotClient {
     
