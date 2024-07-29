@@ -1,0 +1,6 @@
+# Specify files that shouldn't be modified by Fern
+src/wrapper/
+src/core/auth/OAuthTokenProvider.ts
+src/index.ts
+
+README.md
