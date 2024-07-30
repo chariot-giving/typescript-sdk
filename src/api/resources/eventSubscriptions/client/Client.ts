@@ -11,7 +11,7 @@ import * as errors from "../../../../errors/index";
 
 export declare namespace EventSubscriptions {
     interface Options {
-        environment?: core.Supplier<environments.ChariotEnvironment | string>;
+        environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
@@ -60,15 +60,16 @@ export class EventSubscriptions {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                        .api,
                     "v1/event_subscriptions"
                 ),
                 method: "GET",
                 headers: {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "chariot",
-                    "X-Fern-SDK-Version": "0.0.1-alpha0",
+                    "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                    "X-Fern-SDK-Version": "0.0.1-alpha1",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -185,15 +186,16 @@ export class EventSubscriptions {
     ): Promise<Chariot.EventSubscription> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                    .api,
                 "v1/event_subscriptions"
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot",
-                "X-Fern-SDK-Version": "0.0.1-alpha0",
+                "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                "X-Fern-SDK-Version": "0.0.1-alpha1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -310,15 +312,16 @@ export class EventSubscriptions {
     ): Promise<Chariot.EventSubscription> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                    .api,
                 `v1/event_subscriptions/${encodeURIComponent(id)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot",
-                "X-Fern-SDK-Version": "0.0.1-alpha0",
+                "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                "X-Fern-SDK-Version": "0.0.1-alpha1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -436,15 +439,16 @@ export class EventSubscriptions {
     ): Promise<Chariot.EventSubscription> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                    .api,
                 `v1/event_subscriptions/${encodeURIComponent(id)}`
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot",
-                "X-Fern-SDK-Version": "0.0.1-alpha0",
+                "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                "X-Fern-SDK-Version": "0.0.1-alpha1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
