@@ -817,9 +817,9 @@ await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
 </dl>
 </details>
 
-## DaFs
+## DAFs
 
-<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
+<details><summary><code>client.dAFs.<a href="/src/api/resources/dAFs/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
 <dl>
 <dd>
 
@@ -847,7 +847,7 @@ List all DAF objects. This API allows for paginating over many results.
 <dd>
 
 ```typescript
-await client.daFs.list();
+await client.dAFs.list();
 ```
 
 </dd>
@@ -871,7 +871,7 @@ await client.daFs.list();
 <dl>
 <dd>
 
-**requestOptions:** `DaFs.RequestOptions`
+**requestOptions:** `DAFs.RequestOptions`
 
 </dd>
 </dl>
@@ -882,7 +882,7 @@ await client.daFs.list();
 </dl>
 </details>
 
-<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">get</a>(id) -> Chariot.Daf</code></summary>
+<details><summary><code>client.dAFs.<a href="/src/api/resources/dAFs/client/Client.ts">get</a>(id) -> Chariot.Daf</code></summary>
 <dl>
 <dd>
 
@@ -912,7 +912,7 @@ If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
 <dd>
 
 ```typescript
-await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
+await client.dAFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 ```
 
 </dd>
@@ -936,7 +936,7 @@ await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 <dl>
 <dd>
 
-**requestOptions:** `DaFs.RequestOptions`
+**requestOptions:** `DAFs.RequestOptions`
 
 </dd>
 </dl>

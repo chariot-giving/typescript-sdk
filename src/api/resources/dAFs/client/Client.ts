@@ -9,9 +9,9 @@ import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
-export declare namespace DaFs {
+export declare namespace DAFs {
     interface Options {
-        environment?: core.Supplier<environments.ChariotEnvironment | string>;
+        environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
@@ -26,24 +26,24 @@ export declare namespace DaFs {
     }
 }
 
-export class DaFs {
-    constructor(protected readonly _options: DaFs.Options = {}) {}
+export class DAFs {
+    constructor(protected readonly _options: DAFs.Options = {}) {}
 
     /**
      * List all DAF objects. This API allows for paginating over many results.
      *
      * @param {Chariot.DaFsListRequest} request
-     * @param {DaFs.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {DAFs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
      * @throws {@link Chariot.InternalServerError}
      *
      * @example
-     *     await client.daFs.list()
+     *     await client.dAFs.list()
      */
     public async list(
         request: Chariot.DaFsListRequest = {},
-        requestOptions?: DaFs.RequestOptions
+        requestOptions?: DAFs.RequestOptions
     ): Promise<core.Page<Chariot.Daf>> {
         const list = async (request: Chariot.DaFsListRequest): Promise<Chariot.DaFsListResponse> => {
             const { pageLimit, pageToken } = request;
@@ -56,15 +56,16 @@ export class DaFs {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                        .api,
                     "v1/dafs"
                 ),
                 method: "GET",
                 headers: {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "chariot",
-                    "X-Fern-SDK-Version": "0.0.1-alpha0",
+                    "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                    "X-Fern-SDK-Version": "0.0.4",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -143,27 +144,28 @@ export class DaFs {
      * If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
      *
      * @param {string} id - the unique id of the DAF
-     * @param {DaFs.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {DAFs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
      * @throws {@link Chariot.NotFoundError}
      * @throws {@link Chariot.InternalServerError}
      *
      * @example
-     *     await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722")
+     *     await client.dAFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722")
      */
-    public async get(id: string, requestOptions?: DaFs.RequestOptions): Promise<Chariot.Daf> {
+    public async get(id: string, requestOptions?: DAFs.RequestOptions): Promise<Chariot.Daf> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                    .api,
                 `v1/dafs/${encodeURIComponent(id)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot",
-                "X-Fern-SDK-Version": "0.0.1-alpha0",
+                "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                "X-Fern-SDK-Version": "0.0.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

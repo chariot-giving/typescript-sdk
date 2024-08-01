@@ -7,14 +7,14 @@ import * as core from "./core";
 import { Nonprofits } from "./api/resources/nonprofits/client/Client";
 import { Connects } from "./api/resources/connects/client/Client";
 import { Grants } from "./api/resources/grants/client/Client";
-import { DaFs } from "./api/resources/daFs/client/Client";
+import { DAFs } from "./api/resources/dAFs/client/Client";
 import { Events } from "./api/resources/events/client/Client";
 import { EventSubscriptions } from "./api/resources/eventSubscriptions/client/Client";
 import { Auth } from "./api/resources/auth/client/Client";
 
 export declare namespace ChariotClient {
     interface Options {
-        environment?: core.Supplier<environments.ChariotEnvironment | string>;
+        environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
@@ -50,10 +50,10 @@ export class ChariotClient {
         return (this._grants ??= new Grants(this._options));
     }
 
-    protected _daFs: DaFs | undefined;
+    protected _dAFs: DAFs | undefined;
 
-    public get daFs(): DaFs {
-        return (this._daFs ??= new DaFs(this._options));
+    public get dAFs(): DAFs {
+        return (this._dAFs ??= new DAFs(this._options));
     }
 
     protected _events: Events | undefined;
