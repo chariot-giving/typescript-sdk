@@ -34,8 +34,7 @@ export class OAuthTokenProvider {
 
     public async getToken(): Promise<string> {
         if (this._accessToken && this._expiresAt > new Date()) {
-            throw new Error(this._accessToken)
-            // return this._accessToken;
+            return this._accessToken;
         }
         return this.refresh();
     }
