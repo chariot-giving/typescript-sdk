@@ -4,7 +4,6 @@
 
 export interface ChariotEnvironmentUrls {
     api: string;
-    production: string;
     login: string;
 }
 
@@ -19,4 +18,4 @@ export const ChariotEnvironment = {
     },
 } as const;
 
-export type ChariotEnvironment = typeof ChariotEnvironment.Production;
+export type ChariotEnvironment = ChariotEnvironmentUrls;
