@@ -14,7 +14,7 @@ export declare namespace ChariotClient {
 }
 
 export class ChariotClient extends FernClient {
-    constructor(protected readonly _options: ChariotClient.Options) {
+    constructor(_options: ChariotClient.Options) {
         const _oauthTokenProvider = new OAuthTokenProvider({
             clientId: _options.clientId,
             clientSecret: _options.clientSecret,
