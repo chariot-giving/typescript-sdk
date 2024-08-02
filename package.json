@@ -1,6 +1,6 @@
 {
-    "name": "chariot",
-    "version": "0.0.1-alpha0",
+    "name": "chariot-typescript-sdk",
+    "version": "0.0.4",
     "private": false,
     "repository": "https://github.com/chariot-giving/typescript-sdk",
     "main": "./index.js",

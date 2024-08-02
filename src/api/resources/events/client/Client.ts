@@ -11,7 +11,7 @@ import * as errors from "../../../../errors/index";
 
 export declare namespace Events {
     interface Options {
-        environment?: core.Supplier<environments.ChariotEnvironment | string>;
+        environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
@@ -61,15 +61,16 @@ export class Events {
             }
             const _response = await (this._options.fetcher ?? core.fetcher)({
                 url: urlJoin(
-                    (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                        .api,
                     "v1/events"
                 ),
                 method: "GET",
                 headers: {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "chariot",
-                    "X-Fern-SDK-Version": "0.0.1-alpha0",
+                    "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                    "X-Fern-SDK-Version": "0.0.4",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -180,15 +181,16 @@ export class Events {
     public async get(id: string, requestOptions?: Events.RequestOptions): Promise<Chariot.Event> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production,
+                ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
+                    .api,
                 `v1/events/${encodeURIComponent(id)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot",
-                "X-Fern-SDK-Version": "0.0.1-alpha0",
+                "X-Fern-SDK-Name": "chariot-typescript-sdk",
+                "X-Fern-SDK-Version": "0.0.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
