@@ -8,7 +8,7 @@ The Chariot TypeScript library provides convenient access to the Chariot API fro
 ## Installation
 
 ```sh
-npm i -s chariot
+npm i -s @chariot-giving/typescript-sdk
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm i -s chariot
 Instantiate and use the client with the following:
 
 ```typescript
-import { ChariotClient } from "chariot";
+import { ChariotClient } from "@chariot-giving/typescript-sdk";
 
 const client = new ChariotClient({ 
     clientId: "YOUR_CLIENT_ID",
@@ -36,7 +36,7 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { Chariot } from "chariot";
+import { Chariot } from "@chariot-giving/typescript-sdk";
 
 const request: Chariot.NonprofitsCreateRequest = {
     ...
@@ -49,7 +49,7 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { ChariotError } from "chariot";
+import { ChariotError } from "@chariot-giving/typescript-sdk";
 
 try {
     await client.nonprofits.create(...);

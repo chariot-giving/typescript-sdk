@@ -1,10 +1,24 @@
 {
-    "name": "chariot-typescript-sdk",
+    "name": "@chariot-giving/typescript-sdk",
     "version": "0.0.4",
     "private": false,
     "repository": "https://github.com/chariot-giving/typescript-sdk",
+    "description": "The Chariot TypeScript library provides convenient access to the Chariot API from TypeScript.",
     "main": "./index.js",
     "types": "./index.d.ts",
+    "author": "Chariot Giving",
+    "license": "MIT",
+    "keywords": [
+        "chariot",
+        "chariot giving",
+        "typescript",
+        "sdk"
+    ],
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
     "scripts": {
         "format": "prettier . --write --ignore-unknown",
         "build": "tsc",
