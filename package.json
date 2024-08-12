@@ -4,8 +4,8 @@
     "private": false,
     "repository": "https://github.com/chariot-giving/typescript-sdk",
     "description": "The Chariot TypeScript library provides convenient access to the Chariot API from TypeScript.",
-    "main": "./index.js",
-    "types": "./index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "author": "Chariot Giving",
     "license": "MIT",
     "keywords": [
