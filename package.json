@@ -1,6 +1,6 @@
 {
     "name": "@chariot-giving/typescript-sdk",
-    "version": "v0.0.1-alpha9",
+    "version": "v1.0.0",
     "private": false,
     "repository": "https://github.com/chariot-giving/typescript-sdk",
     "main": "./index.js",
