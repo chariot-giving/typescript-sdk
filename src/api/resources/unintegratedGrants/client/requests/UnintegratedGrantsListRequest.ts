@@ -13,7 +13,7 @@
  *         chariotApiKey: "live_xJd0lUrvpDkzeGBWZbuI2wbvEdM"
  *     }
  */
-export interface ListRecurringGrantsRequest {
+export interface UnintegratedGrantsListRequest {
     /**
      * the number of results to return; defaults to 10, max is 100
      */
@@ -23,7 +23,7 @@ export interface ListRecurringGrantsRequest {
      */
     pageToken?: string;
     /**
-     * the apiKey of the Connect object
+     * the `apiKey` of the Connect object
      */
     chariotApiKey: string;
 }

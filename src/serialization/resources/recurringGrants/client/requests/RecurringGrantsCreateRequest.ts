@@ -5,26 +5,26 @@
 import * as serializers from "../../../../index";
 import * as Chariot from "../../../../../api/index";
 import * as core from "../../../../../core";
-import { CreateRecurringGrantRequestDonor } from "../../types/CreateRecurringGrantRequestDonor";
+import { RecurringGrantsCreateRequestDonor } from "../../types/RecurringGrantsCreateRequestDonor";
 import { GrantAddress } from "../../../../types/GrantAddress";
 
-export const CreateRecurringGrantRequest: core.serialization.Schema<
-    serializers.CreateRecurringGrantRequest.Raw,
-    Chariot.CreateRecurringGrantRequest
+export const RecurringGrantsCreateRequest: core.serialization.Schema<
+    serializers.RecurringGrantsCreateRequest.Raw,
+    Chariot.RecurringGrantsCreateRequest
 > = core.serialization.object({
     workflowSessionId: core.serialization.string(),
     amount: core.serialization.number(),
     applicationFeeAmount: core.serialization.number().optional(),
-    donor: CreateRecurringGrantRequestDonor.optional(),
+    donor: RecurringGrantsCreateRequestDonor.optional(),
     address: GrantAddress.optional(),
 });
 
-export declare namespace CreateRecurringGrantRequest {
+export declare namespace RecurringGrantsCreateRequest {
     interface Raw {
         workflowSessionId: string;
         amount: number;
         applicationFeeAmount?: number | null;
-        donor?: CreateRecurringGrantRequestDonor.Raw | null;
+        donor?: RecurringGrantsCreateRequestDonor.Raw | null;
         address?: GrantAddress.Raw | null;
     }
 }

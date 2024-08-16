@@ -30,11 +30,10 @@ export class Nonprofits {
     constructor(protected readonly _options: Nonprofits.Options = {}) {}
 
     /**
-     * Get a nonprofit organization by EIN.
-     * If the nonprofit does not exist, this returns 404 Not Found status.
-     * If the nonprofit does not pass our compliance checks, a 422 Unprocessable Content is returned with a reason.
-     * In the case that the nonprofit does not exist, you can create one by calling the POST /v1/nonprofits API endpoint.
-     * The EIN should be exactly 9 digits and should not contain any special characters such as dashes.
+     * Retrieves a nonprofit organization by an [Employee Identification Number](https://www.irs.gov/charities-non-profits/employer-identification-number) (EIN).
+     * The EIN is a unique number that identifies the organization to the Internal Revenue Service (IRS).
+     *
+     * In the case that the organization does not exist within Chariot's system, you can create one by calling the [Create Nonprofit](/api-reference/nonprofits/create) API endpoint.
      *
      * @param {string} ein - The unique federal employer identification number (EIN) of the nonprofit.
      *                       This value should be exactly 9 digits and should not contain any special characters such as dashes.
@@ -60,8 +59,8 @@ export class Nonprofits {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -157,11 +156,20 @@ export class Nonprofits {
     }
 
     /**
-     * Create a nonprofit organization account.
+     * Create a nonprofit organization.
+     *
      * This is useful for integration partners to use after a nonprofit consents to use the Chariot payment option on their donation forms.
-     * If a nonprofit does not already exist for the EIN, this will return a 201 Created status.
-     * If a nonprofit already exists for the given EIN on the system, this will return a 200 Created status.
-     * If the nonprofit does not pass our compliance checks, a 422 Unprocessable Content is returned with a reason.
+     *
+     * <Tip>
+     * If a nonprofit does not already exist for the EIN, this will return a `201 Created` status.
+     * If a nonprofit already exists for the given EIN on the system, this will return a `200 OK` status.
+     * </Tip>
+     *
+     * <Warning>
+     * Handling errors:
+     * - If the nonprofit does not exist within Chariot's database, a `404 Not Found` status is returned.
+     * - If the nonprofit exists but does not pass Chariot's compliance checks, a `412 Precondition Failed` status is returned with a reason.
+     * </Warning>
      *
      * @param {Chariot.NonprofitsCreateRequest} request
      * @param {Nonprofits.RequestOptions} requestOptions - Request-specific configuration.
@@ -195,8 +203,8 @@ export class Nonprofits {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -303,8 +311,7 @@ export class Nonprofits {
     }
 
     /**
-     * Get a nonprofit organization by ID.
-     * If the nonprofit does not exist, this returns 404 Not Found status.
+     * Retrieves the nonprofit organization with the given ID.
      *
      * @param {string} id - The unique identifier for the nonprofit
      * @param {Nonprofits.RequestOptions} requestOptions - Request-specific configuration.
@@ -329,8 +336,8 @@ export class Nonprofits {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

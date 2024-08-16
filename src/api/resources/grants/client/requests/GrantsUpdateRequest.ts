@@ -19,7 +19,6 @@ export interface GrantsUpdateRequest {
      * The date and time the grant was acknowledged by the nonprofit.
      * This is useful for nonprofits to indicate when they have received and processed the grant.
      * Expressed in ISO 8601 format.
-     * A null value indicates that the grant has not been acknowledged.
      */
     acknowledgedAt?: Date;
 }

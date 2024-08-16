@@ -11,15 +11,13 @@
  */
 export interface ConnectsCreateRequest {
     /**
-     * The unique identifier (ID) for the nonprofit.
+     * The unique id of the nonprofit.
      * The format should be a v4 UUID according to RFC 4122.
-     * This can be found by calling the /v1/nonprofit/{ein} API endpoint.
      */
     nonprofit: string;
     /**
-     * The unique identifier (ID) for the suborganization within the nonprofit.
+     * The unique id for the suborganization within the nonprofit.
      * The format should be a v4 UUID according to RFC 4122.
-     * This can be found by calling the /v1/nonprofit/{ein} API endpoint.
      */
     suborganization?: string;
     /** A human readable name of the Connect, optional. */

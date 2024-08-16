@@ -68,8 +68,8 @@ export class EventSubscriptions {
                 headers: {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                    "X-Fern-SDK-Version": "0.0.4",
+                    "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                    "X-Fern-SDK-Version": "v0.0.1-alpha8",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -194,8 +194,8 @@ export class EventSubscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -292,7 +292,7 @@ export class EventSubscriptions {
     }
 
     /**
-     * Retrieve an event subscription corresponding to your Chariot account.
+     * Retrieve an event subscription with the given ID.
      *
      * @param {string} id - The unique identifier for the event subscription
      * @param {EventSubscriptions.RequestOptions} requestOptions - Request-specific configuration.
@@ -320,8 +320,8 @@ export class EventSubscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -417,7 +417,7 @@ export class EventSubscriptions {
     }
 
     /**
-     * Update an event subscription corresponding to your Chariot account.
+     * Update an event subscription with the given ID.
      *
      * @param {string} id - The unique identifier for the event subscription
      * @param {Chariot.EventSubscriptionsUpdateRequest} request
@@ -447,8 +447,8 @@ export class EventSubscriptions {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

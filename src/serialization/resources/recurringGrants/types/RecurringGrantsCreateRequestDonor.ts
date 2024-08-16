@@ -6,9 +6,9 @@ import * as serializers from "../../../index";
 import * as Chariot from "../../../../api/index";
 import * as core from "../../../../core";
 
-export const CreateRecurringGrantRequestDonor: core.serialization.ObjectSchema<
-    serializers.CreateRecurringGrantRequestDonor.Raw,
-    Chariot.CreateRecurringGrantRequestDonor
+export const RecurringGrantsCreateRequestDonor: core.serialization.ObjectSchema<
+    serializers.RecurringGrantsCreateRequestDonor.Raw,
+    Chariot.RecurringGrantsCreateRequestDonor
 > = core.serialization.object({
     firstName: core.serialization.string().optional(),
     lastName: core.serialization.string().optional(),
@@ -16,7 +16,7 @@ export const CreateRecurringGrantRequestDonor: core.serialization.ObjectSchema<
     phone: core.serialization.string().optional(),
 });
 
-export declare namespace CreateRecurringGrantRequestDonor {
+export declare namespace RecurringGrantsCreateRequestDonor {
     interface Raw {
         firstName?: string | null;
         lastName?: string | null;

@@ -69,8 +69,8 @@ export class Events {
                 headers: {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                    "X-Fern-SDK-Version": "0.0.4",
+                    "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                    "X-Fern-SDK-Version": "v0.0.1-alpha8",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -164,9 +164,9 @@ export class Events {
     }
 
     /**
-     * Retrieve an event corresponding to your Chariot account.
+     * Retrieve an event with the given ID.
      *
-     * @param {string} id - The unique identifier for the event
+     * @param {string} id - The unique id for the event
      * @param {Events.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
@@ -189,8 +189,8 @@ export class Events {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

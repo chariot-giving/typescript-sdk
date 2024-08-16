@@ -9,7 +9,7 @@ import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
-export declare namespace DAFs {
+export declare namespace DaFs {
     interface Options {
         environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
@@ -26,24 +26,28 @@ export declare namespace DAFs {
     }
 }
 
-export class DAFs {
-    constructor(protected readonly _options: DAFs.Options = {}) {}
+export class DaFs {
+    constructor(protected readonly _options: DaFs.Options = {}) {}
 
     /**
-     * List all DAF objects. This API allows for paginating over many results.
+     * Returns a list of all Donor Advised Funds within Chariot's system. This API allows for paginating over many results.
+     *
+     * <Note>
+     * If there are DAFs missing from the list, please contact support at support@givechariot.com.
+     * </Note>
      *
      * @param {Chariot.DaFsListRequest} request
-     * @param {DAFs.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {DaFs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
      * @throws {@link Chariot.InternalServerError}
      *
      * @example
-     *     await client.dAFs.list()
+     *     await client.daFs.list()
      */
     public async list(
         request: Chariot.DaFsListRequest = {},
-        requestOptions?: DAFs.RequestOptions
+        requestOptions?: DaFs.RequestOptions
     ): Promise<core.Page<Chariot.Daf>> {
         const list = async (request: Chariot.DaFsListRequest): Promise<Chariot.DaFsListResponse> => {
             const { pageLimit, pageToken } = request;
@@ -64,8 +68,8 @@ export class DAFs {
                 headers: {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
-                    "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                    "X-Fern-SDK-Version": "0.0.4",
+                    "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                    "X-Fern-SDK-Version": "v0.0.1-alpha8",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -139,21 +143,20 @@ export class DAFs {
     }
 
     /**
-     * Get a DAF object by id.
-     * If the DAF does not exist, returns a 404 status.
-     * If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
+     * Retrieve a DAF with a given ID.
      *
-     * @param {string} id - the unique id of the DAF
-     * @param {DAFs.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id - The unique id of the DAF.
+     *                      The format should be a v4 UUID according to RFC 4122.
+     * @param {DaFs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
      * @throws {@link Chariot.NotFoundError}
      * @throws {@link Chariot.InternalServerError}
      *
      * @example
-     *     await client.dAFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722")
+     *     await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722")
      */
-    public async get(id: string, requestOptions?: DAFs.RequestOptions): Promise<Chariot.Daf> {
+    public async get(id: string, requestOptions?: DaFs.RequestOptions): Promise<Chariot.Daf> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
@@ -164,8 +167,8 @@ export class DAFs {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

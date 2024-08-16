@@ -5,19 +5,19 @@
 import * as serializers from "../../../index";
 import * as Chariot from "../../../../api/index";
 import * as core from "../../../../core";
-import { UnintegratedGrant } from "../../../types/UnintegratedGrant";
+import { Grant } from "../../../types/Grant";
 
 export const GrantsListResponse: core.serialization.ObjectSchema<
     serializers.GrantsListResponse.Raw,
     Chariot.GrantsListResponse
 > = core.serialization.object({
-    results: core.serialization.list(UnintegratedGrant).optional(),
+    results: core.serialization.list(Grant).optional(),
     nextPageToken: core.serialization.string().optional(),
 });
 
 export declare namespace GrantsListResponse {
     interface Raw {
-        results?: UnintegratedGrant.Raw[] | null;
+        results?: Grant.Raw[] | null;
         nextPageToken?: string | null;
     }
 }

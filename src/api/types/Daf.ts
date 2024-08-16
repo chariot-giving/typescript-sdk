@@ -3,7 +3,9 @@
  */
 
 /**
- * A DAF represents Donor-Advised Funds which are connected with Chariot. These may be integrated (able to authenticate through Chariot) or unintegrated.
+ * A Donor-Advised Fund, or `DAF` for short, is a special-purpose, tax-advantaged charitable account.
+ * For more information, please see the [IRS website](https://www.irs.gov/charities-non-profits/charitable-organizations/donor-advised-funds) for a full description.
+ * In the case that a DAF is supported, a donor will be able to initiate a grant directly through DAFpay.
  */
 export interface Daf {
     /** The unique identifier for this object. */
@@ -20,9 +22,9 @@ export interface Daf {
     state: string;
     /** The zipcode for the address. */
     zip: string;
-    /** A flag to indicate if this DAF is supported by Chariot. */
+    /** A flag to indicate if this DAF is supported by DAFpay. */
     supported: boolean;
-    /** The minimum grant amount allowed for this DAF. */
+    /** The minimum grant amount in cents allowed for this DAF. */
     minimumGrantAmount: number;
     /** A flag to indicate if the institution is down. */
     institutionDown: boolean;

@@ -30,7 +30,7 @@ export class Auth {
     constructor(protected readonly _options: Auth.Options = {}) {}
 
     /**
-     * Obtain an access token using client credentials
+     * Obtain an OAuth2 access token using client credentials
      *
      * @param {Chariot.AuthGetTokenRequest} request
      * @param {Auth.RequestOptions} requestOptions - Request-specific configuration.
@@ -55,8 +55,8 @@ export class Auth {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

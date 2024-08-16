@@ -7,7 +7,9 @@ import * as core from "./core";
 import { Nonprofits } from "./api/resources/nonprofits/client/Client";
 import { Connects } from "./api/resources/connects/client/Client";
 import { Grants } from "./api/resources/grants/client/Client";
-import { DAFs } from "./api/resources/dAFs/client/Client";
+import { RecurringGrants } from "./api/resources/recurringGrants/client/Client";
+import { UnintegratedGrants } from "./api/resources/unintegratedGrants/client/Client";
+import { DaFs } from "./api/resources/daFs/client/Client";
 import { Events } from "./api/resources/events/client/Client";
 import { EventSubscriptions } from "./api/resources/eventSubscriptions/client/Client";
 import { Auth } from "./api/resources/auth/client/Client";
@@ -50,10 +52,22 @@ export class ChariotClient {
         return (this._grants ??= new Grants(this._options));
     }
 
-    protected _dAFs: DAFs | undefined;
+    protected _recurringGrants: RecurringGrants | undefined;
 
-    public get dAFs(): DAFs {
-        return (this._dAFs ??= new DAFs(this._options));
+    public get recurringGrants(): RecurringGrants {
+        return (this._recurringGrants ??= new RecurringGrants(this._options));
+    }
+
+    protected _unintegratedGrants: UnintegratedGrants | undefined;
+
+    public get unintegratedGrants(): UnintegratedGrants {
+        return (this._unintegratedGrants ??= new UnintegratedGrants(this._options));
+    }
+
+    protected _daFs: DaFs | undefined;
+
+    public get daFs(): DaFs {
+        return (this._daFs ??= new DaFs(this._options));
     }
 
     protected _events: Events | undefined;

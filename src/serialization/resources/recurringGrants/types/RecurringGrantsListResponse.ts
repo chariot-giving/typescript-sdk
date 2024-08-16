@@ -7,15 +7,15 @@ import * as Chariot from "../../../../api/index";
 import * as core from "../../../../core";
 import { RecurringGrant } from "../../../types/RecurringGrant";
 
-export const ListRecurringGrantsResponse: core.serialization.ObjectSchema<
-    serializers.ListRecurringGrantsResponse.Raw,
-    Chariot.ListRecurringGrantsResponse
+export const RecurringGrantsListResponse: core.serialization.ObjectSchema<
+    serializers.RecurringGrantsListResponse.Raw,
+    Chariot.RecurringGrantsListResponse
 > = core.serialization.object({
     results: core.serialization.list(RecurringGrant).optional(),
     nextPageToken: core.serialization.string().optional(),
 });
 
-export declare namespace ListRecurringGrantsResponse {
+export declare namespace RecurringGrantsListResponse {
     interface Raw {
         results?: RecurringGrant.Raw[] | null;
         nextPageToken?: string | null;

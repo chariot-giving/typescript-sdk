@@ -11,11 +11,14 @@ import * as Chariot from "../../../../index";
  *         amount: 1.1
  *     }
  */
-export interface CreateRecurringGrantRequest {
-    /** The identifier of the Workflow Session */
+export interface RecurringGrantsCreateRequest {
+    /**
+     * The identifier of the donor's DAFpay Workflow Session.
+     * See [Integrating Connect](/integrating-connect) for how to get this value from the DAFpay client-side SDK.
+     */
     workflowSessionId: string;
     /**
-     * The final grant amount in cents that will be processed by Chariot and submitted to the DAF for monthly recurring gifts.
+     * The final grant amount in cents that will be processed by Chariot and submitted to the DAF for recurring gifts.
      * This amount must be in whole dollar increments (rounded to the nearest hundred) as currently
      * all DAFs only accept whole dollar grants.
      */
@@ -29,6 +32,6 @@ export interface CreateRecurringGrantRequest {
      * If the 5% limit is exceeded, a 400 error will be returned.
      */
     applicationFeeAmount?: number;
-    donor?: Chariot.CreateRecurringGrantRequestDonor;
+    donor?: Chariot.RecurringGrantsCreateRequestDonor;
     address?: Chariot.GrantAddress;
 }

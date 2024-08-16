@@ -23,7 +23,7 @@ export interface GrantsListRequest {
      */
     pageToken?: string;
     /**
-     * the apiKey of the Connect object
+     * the `apiKey` of the Connect object
      */
     chariotApiKey: string;
 }

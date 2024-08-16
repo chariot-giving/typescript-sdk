@@ -14,11 +14,10 @@
 <dl>
 <dd>
 
-Get a nonprofit organization by EIN.
-If the nonprofit does not exist, this returns 404 Not Found status.
-If the nonprofit does not pass our compliance checks, a 422 Unprocessable Content is returned with a reason.
-In the case that the nonprofit does not exist, you can create one by calling the POST /v1/nonprofits API endpoint.
-The EIN should be exactly 9 digits and should not contain any special characters such as dashes.
+Retrieves a nonprofit organization by an [Employee Identification Number](https://www.irs.gov/charities-non-profits/employer-identification-number) (EIN).
+The EIN is a unique number that identifies the organization to the Internal Revenue Service (IRS).
+
+In the case that the organization does not exist within Chariot's system, you can create one by calling the [Create Nonprofit](/api-reference/nonprofits/create) API endpoint.
 
 </dd>
 </dl>
@@ -84,12 +83,20 @@ This value should be exactly 9 digits and should not contain any special charact
 <dl>
 <dd>
 
-Create a nonprofit organization account.
-This is useful for integration partners to use after a nonprofit consents to use the Chariot payment option on their donation forms.
-If a nonprofit does not already exist for the EIN, this will return a 201 Created status.
-If a nonprofit already exists for the given EIN on the system, this will return a 200 Created status.
-If the nonprofit does not pass our compliance checks, a 422 Unprocessable Content is returned with a reason.
+Create a nonprofit organization.
 
+This is useful for integration partners to use after a nonprofit consents to use the Chariot payment option on their donation forms.
+
+<Tip>
+If a nonprofit does not already exist for the EIN, this will return a `201 Created` status.
+If a nonprofit already exists for the given EIN on the system, this will return a `200 OK` status.
+</Tip>
+
+<Warning>
+Handling errors:
+- If the nonprofit does not exist within Chariot's database, a `404 Not Found` status is returned.
+- If the nonprofit exists but does not pass Chariot's compliance checks, a `412 Precondition Failed` status is returned with a reason.
+</Warning>
 </dd>
 </dl>
 </dd>
@@ -156,8 +163,7 @@ await client.nonprofits.create({
 <dl>
 <dd>
 
-Get a nonprofit organization by ID.
-If the nonprofit does not exist, this returns 404 Not Found status.
+Retrieves the nonprofit organization with the given ID.
 
 </dd>
 </dl>
@@ -222,8 +228,14 @@ await client.nonprofits.getById("g33ee4ee-f881-42a0-85e3-1dde7118w9k2");
 <dl>
 <dd>
 
-Get or create a Connect object. Only one Connect object can be created per Nonprofit for a given Fundraising Application. If one already exists, this will return a 200 status with the existing object. The returned Connect can be used to integrate the client-side Chariot Connect component using the id property (CID) and also query for data generated from the Chariot Connect instance from the Chariot API using the apiKey property.
+Get an existing connect or create a new connect for an existing nonprofit organization.
 
+The returned Connect can be used to integrate the client-side Chariot Connect component using the `id` property (CID) and also query for data generated from the Chariot Connect instance from the Chariot API using the `x-chariot-api-key` header parameter.
+
+<Note>
+Only one Connect object can be created per Nonprofit.
+If one already exists, this will return a `200 OK` status with the existing object.
+</Note>
 </dd>
 </dl>
 </dd>
@@ -288,7 +300,7 @@ await client.connects.create({
 <dl>
 <dd>
 
-Get a Connect object with the unique identifier (CID)
+Retrieve a connect with the given ID.
 
 </dd>
 </dl>
@@ -341,7 +353,7 @@ await client.connects.get("live_xJd0lUrvpDkzeGBWZbuI2wbvEdM");
 
 ## Grants
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.UnintegratedGrant></code></summary>
+<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Grant></code></summary>
 <dl>
 <dd>
 
@@ -353,7 +365,7 @@ await client.connects.get("live_xJd0lUrvpDkzeGBWZbuI2wbvEdM");
 <dl>
 <dd>
 
-List all unintegrated grants for the provided API Key. This API allows for paginating over many results.
+Returns a list of all grants for a given Connect. This API allows for paginating over many results.
 
 </dd>
 </dl>
@@ -418,13 +430,16 @@ await client.grants.list({
 <dl>
 <dd>
 
-Create a grant from a workflow session. This is useful to capture a grant intent from an authorized connect workflow session and submit the grant request.
-The grant must be captured within 5 minutes of authorization otherwise the request will return status 410 Gone.
-A grant can only be captured once from any given workflow session so any duplicate requests will return status 409 Conflict.
-The grant amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants.
-The grant amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status 400 Bad Request.
-The grant amount must be less than or equal to the user's DAF account balance otherwise the request will return status 400 Bad Request.
+Create and submit a new grant. This should be used to capture a grant intent from an authorized DAFpay workflow session and submit the grant request to the DAF sponsor.
 
+<Warning>
+Error handling:
+- The grant must be captured within 15 minutes of authorization otherwise the request will return status `410 Gone`.
+- A grant can only be captured once from any given workflow session so any duplicate requests will return status `409 Conflict`.
+- The amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants otherwise the request will return status `400 Bad Request`.
+- The amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status `400 Bad Request`.
+- The amount must be less than or equal to the user's DAF account balance otherwise the request will return status `400 Bad Request`.
+</Warning>
 </dd>
 </dl>
 </dd>
@@ -477,7 +492,7 @@ await client.grants.create({
 </dl>
 </details>
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">get</a>(id) -> Chariot.UnintegratedGrant</code></summary>
+<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">get</a>(id) -> Chariot.Grant</code></summary>
 <dl>
 <dd>
 
@@ -489,9 +504,7 @@ await client.grants.create({
 <dl>
 <dd>
 
-Get an unintegrated grant object generated by Chariot Connect.
-If the grant does not exist, returns a 404 status.
-If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
+Retrieve a grant with the given ID.
 
 </dd>
 </dl>
@@ -523,7 +536,10 @@ await client.grants.get("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-**id:** `string` — the unique id of the unintegrated grant
+**id:** `string`
+
+The unique id of the grant.
+The format should be a v4 UUID according to RFC 4122.
 
 </dd>
 </dl>
@@ -542,7 +558,7 @@ await client.grants.get("10229488-08d2-4629-b70c-a2f4f4d25344");
 </dl>
 </details>
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">update</a>(id, { ...params }) -> Chariot.UnintegratedGrant</code></summary>
+<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">update</a>(id, { ...params }) -> Chariot.Grant</code></summary>
 <dl>
 <dd>
 
@@ -554,10 +570,8 @@ await client.grants.get("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-Update an unintegrated grant object generated by Chariot Connect.
-This is useful to update the status or acknowledgement of the unintegrated grant.
-If the unintegrated grant does not exist, returns a 404 status.
-If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
+Update a grant object with the given ID.
+This can be used to update the status or acknowledgement of the grant.
 
 </dd>
 </dl>
@@ -589,7 +603,10 @@ await client.grants.update("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-**id:** `string` — the unique id of the unintegrated grant
+**id:** `string`
+
+The unique id of the grant.
+The format should be a v4 UUID according to RFC 4122.
 
 </dd>
 </dl>
@@ -616,7 +633,9 @@ await client.grants.update("10229488-08d2-4629-b70c-a2f4f4d25344");
 </dl>
 </details>
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">listRecurringGrants</a>({ ...params }) -> Chariot.ListRecurringGrantsResponse</code></summary>
+## RecurringGrants
+
+<details><summary><code>client.recurringGrants.<a href="/src/api/resources/recurringGrants/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.RecurringGrant></code></summary>
 <dl>
 <dd>
 
@@ -628,7 +647,7 @@ await client.grants.update("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-List all recurring grants for the provided API Key. This API allows for paginating over many results.
+Returns a list of all recurring grants for a given Connect. This API allows for paginating over many results.
 
 </dd>
 </dl>
@@ -644,7 +663,7 @@ List all recurring grants for the provided API Key. This API allows for paginati
 <dd>
 
 ```typescript
-await client.grants.listRecurringGrants({
+await client.recurringGrants.list({
     chariotApiKey: "live_xJd0lUrvpDkzeGBWZbuI2wbvEdM",
 });
 ```
@@ -662,7 +681,7 @@ await client.grants.listRecurringGrants({
 <dl>
 <dd>
 
-**request:** `Chariot.ListRecurringGrantsRequest`
+**request:** `Chariot.RecurringGrantsListRequest`
 
 </dd>
 </dl>
@@ -670,7 +689,7 @@ await client.grants.listRecurringGrants({
 <dl>
 <dd>
 
-**requestOptions:** `Grants.RequestOptions`
+**requestOptions:** `RecurringGrants.RequestOptions`
 
 </dd>
 </dl>
@@ -681,7 +700,7 @@ await client.grants.listRecurringGrants({
 </dl>
 </details>
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">createRecurringGrant</a>({ ...params }) -> Chariot.RecurringGrant</code></summary>
+<details><summary><code>client.recurringGrants.<a href="/src/api/resources/recurringGrants/client/Client.ts">create</a>({ ...params }) -> Chariot.RecurringGrant</code></summary>
 <dl>
 <dd>
 
@@ -693,13 +712,16 @@ await client.grants.listRecurringGrants({
 <dl>
 <dd>
 
-Create a recurring grant from a workflow session. This is useful to capture a recurring grant intent from an authorized connect workflow session and submit the recurring grant request.
-The recurring grant must be captured within 5 minutes of authorization otherwise the request will return status 410 Gone.
-A recurring grant can only be captured once from any given workflow session so any duplicate requests will return status 409 Conflict.
-The amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants.
-The grant amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status 400 Bad Request.
-The amount for the first grant must be less than or equal to the user's DAF account balance otherwise the request will return status 400 Bad Request.
+Create and submit a new recurring grant. This should be used to capture a recurring grant intent from an authorized DAFpay workflow session and submit the recurring grant request to the DAF sponsor.
 
+<Warning>
+Error handling:
+- The recurring grant must be captured within 15 minutes of authorization otherwise the request will return status `410 Gone`.
+- A recurring grant can only be captured once from any given workflow session so any duplicate requests will return status `409 Conflict`.
+- The amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants otherwise the request will return status `400 Bad Request`.
+- The amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status `400 Bad Request`.
+- The amount must be less than or equal to the user's DAF account balance otherwise the request will return status `400 Bad Request`.
+</Warning>
 </dd>
 </dl>
 </dd>
@@ -714,7 +736,7 @@ The amount for the first grant must be less than or equal to the user's DAF acco
 <dd>
 
 ```typescript
-await client.grants.createRecurringGrant({
+await client.recurringGrants.create({
     workflowSessionId: "workflowSessionId",
     amount: 1.1,
 });
@@ -733,7 +755,7 @@ await client.grants.createRecurringGrant({
 <dl>
 <dd>
 
-**request:** `Chariot.CreateRecurringGrantRequest`
+**request:** `Chariot.RecurringGrantsCreateRequest`
 
 </dd>
 </dl>
@@ -741,7 +763,7 @@ await client.grants.createRecurringGrant({
 <dl>
 <dd>
 
-**requestOptions:** `Grants.RequestOptions`
+**requestOptions:** `RecurringGrants.RequestOptions`
 
 </dd>
 </dl>
@@ -752,7 +774,7 @@ await client.grants.createRecurringGrant({
 </dl>
 </details>
 
-<details><summary><code>client.grants.<a href="/src/api/resources/grants/client/Client.ts">getRecurringGrant</a>(id) -> Chariot.RecurringGrant</code></summary>
+<details><summary><code>client.recurringGrants.<a href="/src/api/resources/recurringGrants/client/Client.ts">get</a>(id) -> Chariot.RecurringGrant</code></summary>
 <dl>
 <dd>
 
@@ -764,9 +786,7 @@ await client.grants.createRecurringGrant({
 <dl>
 <dd>
 
-Get a recurring grant object generated by Chariot Connect.
-If the grant does not exist, returns a 404 status.
-If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
+Retrieve a recurring grant with a given ID.
 
 </dd>
 </dl>
@@ -782,7 +802,7 @@ If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
 <dd>
 
 ```typescript
-await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
+await client.recurringGrants.get("10229488-08d2-4629-b70c-a2f4f4d25344");
 ```
 
 </dd>
@@ -798,7 +818,10 @@ await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-**id:** `string` — the unique id of the recurring grant
+**id:** `string`
+
+The unique id of the recurring grant.
+The format should be a v4 UUID according to RFC 4122.
 
 </dd>
 </dl>
@@ -806,7 +829,7 @@ await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-**requestOptions:** `Grants.RequestOptions`
+**requestOptions:** `RecurringGrants.RequestOptions`
 
 </dd>
 </dl>
@@ -817,9 +840,9 @@ await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
 </dl>
 </details>
 
-## DAFs
+## UnintegratedGrants
 
-<details><summary><code>client.dAFs.<a href="/src/api/resources/dAFs/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
+<details><summary><code>client.unintegratedGrants.<a href="/src/api/resources/unintegratedGrants/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.UnintegratedGrant></code></summary>
 <dl>
 <dd>
 
@@ -831,7 +854,7 @@ await client.grants.getRecurringGrant("10229488-08d2-4629-b70c-a2f4f4d25344");
 <dl>
 <dd>
 
-List all DAF objects. This API allows for paginating over many results.
+Returns a list of all unintegrated grants for a given Connect. This API allows for paginating over many results.
 
 </dd>
 </dl>
@@ -847,7 +870,218 @@ List all DAF objects. This API allows for paginating over many results.
 <dd>
 
 ```typescript
-await client.dAFs.list();
+await client.unintegratedGrants.list({
+    chariotApiKey: "live_xJd0lUrvpDkzeGBWZbuI2wbvEdM",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Chariot.UnintegratedGrantsListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UnintegratedGrants.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.unintegratedGrants.<a href="/src/api/resources/unintegratedGrants/client/Client.ts">get</a>(id) -> Chariot.UnintegratedGrant</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve an unintegrated grant with a given ID.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.unintegratedGrants.get("10229488-08d2-4629-b70c-a2f4f4d25344");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string`
+
+The unique id of the unintegrated grant.
+The format should be a v4 UUID according to RFC 4122.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UnintegratedGrants.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.unintegratedGrants.<a href="/src/api/resources/unintegratedGrants/client/Client.ts">update</a>(id, { ...params }) -> Chariot.UnintegratedGrant</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update an unintegrated grant object with the given ID.
+This can be used to update the status or acknowledgement of the unintegrated grant.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.unintegratedGrants.update("10229488-08d2-4629-b70c-a2f4f4d25344");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string`
+
+The unique id of the unintegrated grant.
+The format should be a v4 UUID according to RFC 4122.
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Chariot.UnintegratedGrantsUpdateRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `UnintegratedGrants.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## DaFs
+
+<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a list of all Donor Advised Funds within Chariot's system. This API allows for paginating over many results.
+
+<Note>
+If there are DAFs missing from the list, please contact support at support@givechariot.com.
+</Note>
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.daFs.list();
 ```
 
 </dd>
@@ -871,7 +1105,7 @@ await client.dAFs.list();
 <dl>
 <dd>
 
-**requestOptions:** `DAFs.RequestOptions`
+**requestOptions:** `DaFs.RequestOptions`
 
 </dd>
 </dl>
@@ -882,7 +1116,7 @@ await client.dAFs.list();
 </dl>
 </details>
 
-<details><summary><code>client.dAFs.<a href="/src/api/resources/dAFs/client/Client.ts">get</a>(id) -> Chariot.Daf</code></summary>
+<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">get</a>(id) -> Chariot.Daf</code></summary>
 <dl>
 <dd>
 
@@ -894,9 +1128,7 @@ await client.dAFs.list();
 <dl>
 <dd>
 
-Get a DAF object by id.
-If the DAF does not exist, returns a 404 status.
-If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
+Retrieve a DAF with a given ID.
 
 </dd>
 </dl>
@@ -912,7 +1144,7 @@ If the provided ID is not a v4 UUID according to RFC 4122, returns a 400 status.
 <dd>
 
 ```typescript
-await client.dAFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
+await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 ```
 
 </dd>
@@ -928,7 +1160,10 @@ await client.dAFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 <dl>
 <dd>
 
-**id:** `string` — the unique id of the DAF
+**id:** `string`
+
+The unique id of the DAF.
+The format should be a v4 UUID according to RFC 4122.
 
 </dd>
 </dl>
@@ -936,7 +1171,7 @@ await client.dAFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 <dl>
 <dd>
 
-**requestOptions:** `DAFs.RequestOptions`
+**requestOptions:** `DaFs.RequestOptions`
 
 </dd>
 </dl>
@@ -1024,7 +1259,7 @@ await client.events.list();
 <dl>
 <dd>
 
-Retrieve an event corresponding to your Chariot account.
+Retrieve an event with the given ID.
 
 </dd>
 </dl>
@@ -1056,7 +1291,7 @@ await client.events.get("id");
 <dl>
 <dd>
 
-**id:** `string` — The unique identifier for the event
+**id:** `string` — The unique id for the event
 
 </dd>
 </dl>
@@ -1218,7 +1453,7 @@ await client.eventSubscriptions.create({
 <dl>
 <dd>
 
-Retrieve an event subscription corresponding to your Chariot account.
+Retrieve an event subscription with the given ID.
 
 </dd>
 </dl>
@@ -1281,7 +1516,7 @@ await client.eventSubscriptions.get("id");
 <dl>
 <dd>
 
-Update an event subscription corresponding to your Chariot account.
+Update an event subscription with the given ID.
 
 </dd>
 </dl>
@@ -1354,7 +1589,7 @@ await client.eventSubscriptions.update("id");
 <dl>
 <dd>
 
-Obtain an access token using client credentials
+Obtain an OAuth2 access token using client credentials
 
 </dd>
 </dl>

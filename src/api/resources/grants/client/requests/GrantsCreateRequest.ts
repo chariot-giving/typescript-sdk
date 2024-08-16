@@ -12,12 +12,15 @@ import * as Chariot from "../../../../index";
  *     }
  */
 export interface GrantsCreateRequest {
-    /** The identifier of the Workflow Session */
+    /**
+     * The identifier of the donor's DAFpay Workflow Session.
+     * See [Integrating Connect](/integrating-connect) for how to get this value from the DAFpay client-side SDK.
+     */
     workflowSessionId: string;
     /**
      * The grant amount in cents that will be processed by Chariot and submitted to the DAF.
      * This amount must be in whole dollar increments (rounded to the nearest hundred) as currently
-     * all DAFs only accept whole dollar grants.
+     * all DAFs only accept whole dollar grant amounts.
      */
     amount: number;
     /**
@@ -26,7 +29,7 @@ export interface GrantsCreateRequest {
      * Chariot collects the fee you determine from the nonprofit and passes it to your platform.
      * Please note that platform fees are only taken when the grant is successfully received by the Nonprofit.
      * The sum of Chariot's fee and the applicationFeeAmount cannot exceed 5% of the grant's amount.
-     * If the 5% limit is exceeded, a 400 error will be returned.
+     * If the fee limit is exceeded, a `400 Bad Request` error will be returned.
      */
     applicationFeeAmount?: number;
     donor?: Chariot.GrantsCreateRequestDonor;

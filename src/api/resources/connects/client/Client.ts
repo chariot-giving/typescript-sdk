@@ -30,7 +30,14 @@ export class Connects {
     constructor(protected readonly _options: Connects.Options = {}) {}
 
     /**
-     * Get or create a Connect object. Only one Connect object can be created per Nonprofit for a given Fundraising Application. If one already exists, this will return a 200 status with the existing object. The returned Connect can be used to integrate the client-side Chariot Connect component using the id property (CID) and also query for data generated from the Chariot Connect instance from the Chariot API using the apiKey property.
+     * Get an existing connect or create a new connect for an existing nonprofit organization.
+     *
+     * The returned Connect can be used to integrate the client-side Chariot Connect component using the `id` property (CID) and also query for data generated from the Chariot Connect instance from the Chariot API using the `x-chariot-api-key` header parameter.
+     *
+     * <Note>
+     * Only one Connect object can be created per Nonprofit.
+     * If one already exists, this will return a `200 OK` status with the existing object.
+     * </Note>
      *
      * @param {Chariot.ConnectsCreateRequest} request
      * @param {Connects.RequestOptions} requestOptions - Request-specific configuration.
@@ -68,8 +75,8 @@ export class Connects {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -167,7 +174,7 @@ export class Connects {
     }
 
     /**
-     * Get a Connect object with the unique identifier (CID)
+     * Retrieve a connect with the given ID.
      *
      * @param {string} id - the unique id of the connect
      * @param {Connects.RequestOptions} requestOptions - Request-specific configuration.
@@ -192,8 +199,8 @@ export class Connects {
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "chariot-typescript-sdk",
-                "X-Fern-SDK-Version": "0.0.4",
+                "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
+                "X-Fern-SDK-Version": "v0.0.1-alpha8",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

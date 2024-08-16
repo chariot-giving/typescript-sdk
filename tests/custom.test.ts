@@ -1,20 +1,13 @@
-import { ChariotClient, ChariotEnvironment } from "../src"
-
+/**
+ * This is a custom test file, if you wish to add more tests
+ * to your SDK.
+ * Be sure to mark this file in `.fernignore`.
+ *
+ * If you include example requests/responses in your fern definition,
+ * you will have tests automatically generated for you.
+ */
 describe("test", () => {
-    it.skip("default", async () => {
-        const client = new ChariotClient({ 
-            clientId: "YOUR_CLIENT_ID",
-            clientSecret: "YOUR_CLIENT_SECRET",
-            environment: ChariotEnvironment.Sandbox
-        });
-        
-        const response = await client.nonprofits.create({
-            user: {
-                email: "ben.give@co.com",
-            },
-            ein: "043567500",
-        });
-
-        console.log(response);
+    it("default", () => {
+        expect(true).toBe(true);
     });
 });
