@@ -1,4 +1,4 @@
 export * as Chariot from "./api";
-export { ChariotEnvironment } from "./environments";
+export { ChariotClient } from "./Client";
+export { ChariotEnvironment, ChariotEnvironmentUrls } from "./environments";
 export { ChariotError, ChariotTimeoutError } from "./errors";
-export { ChariotClient } from "./wrapper/ChariotClient";

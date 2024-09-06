@@ -50,8 +50,14 @@ export class DaFs {
         requestOptions?: DaFs.RequestOptions
     ): Promise<core.Page<Chariot.Daf>> {
         const list = async (request: Chariot.DaFsListRequest): Promise<Chariot.DaFsListResponse> => {
-            const { pageLimit, pageToken } = request;
+            const { supportedOnly, query, pageLimit, pageToken } = request;
             const _queryParams: Record<string, string | string[] | object | object[]> = {};
+            if (supportedOnly != null) {
+                _queryParams["supportedOnly"] = supportedOnly.toString();
+            }
+            if (query != null) {
+                _queryParams["query"] = query;
+            }
             if (pageLimit != null) {
                 _queryParams["pageLimit"] = pageLimit.toString();
             }
@@ -69,7 +75,7 @@ export class DaFs {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                    "X-Fern-SDK-Version": "v1.0.0",
+                    "X-Fern-SDK-Version": "1.1.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -168,7 +174,7 @@ export class DaFs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "v1.0.0",
+                "X-Fern-SDK-Version": "1.1.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

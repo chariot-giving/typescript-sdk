@@ -11,6 +11,14 @@
  */
 export interface DaFsListRequest {
     /**
+     * If set to true, filters DAFs to only those that have a direct integration with Chariot.
+     */
+    supportedOnly?: boolean;
+    /**
+     * If included, filters DAFs to only those that contain the query. This parameter is case insensitive.
+     */
+    query?: string;
+    /**
      * the number of results to return; defaults to 10, max is 100
      */
     pageLimit?: number;

@@ -18,4 +18,4 @@ export const ChariotEnvironment = {
     },
 } as const;
 
-export type ChariotEnvironment = ChariotEnvironmentUrls;
+export type ChariotEnvironment = typeof ChariotEnvironment.Production | typeof ChariotEnvironment.Sandbox;

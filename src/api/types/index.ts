@@ -1,4 +1,3 @@
-export * from "./OauthScope";
 export * from "./Nonprofit";
 export * from "./Suborganization";
 export * from "./Connect";
