@@ -14,10 +14,9 @@ export interface ContributionFeeDetail {
     amount: number;
     /**
      * This indicates the source of a fee contribution.
-     *
-     * - chariot: Chariot's processing fee
-     * - daf: The DAF's processing fee
-     * - fundraising_application: The fundraising application's processing fee
+     *   * chariot: Chariot's processing fee
+     *   * daf: The DAF's processing fee
+     *   * fundraising_application: The fundraising application's processing fee
      */
     feeType?: Chariot.ContributionFeeDetailFeeType;
 }

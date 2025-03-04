@@ -3,14 +3,14 @@
  */
 
 export interface GrantAddress {
-    /** Address line 1 (e.g. street, PO Box, or company name) */
+    /** Address line 1 (e.g. street, PO Box, or company name). Maximum length: 255 characters. */
     line1?: string;
-    /** Address line 2 (e.g. apartment, suite, unit, or building) */
+    /** Address line 2 (e.g. apartment, suite, unit, or building). Maximum length: 255 characters. */
     line2?: string;
-    /** City, district, suburb, town, or village. */
+    /** City, district, suburb, town, or village.. Maximum length: 255 characters. */
     city?: string;
-    /** State, county, province, or region */
+    /** State, county, province, or region. Maximum length: 255 characters. */
     state?: string;
-    /** ZIP or postal code */
+    /** ZIP or postal code. Maximum length: 255 characters. */
     postalCode?: string;
 }

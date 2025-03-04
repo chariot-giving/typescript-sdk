@@ -47,7 +47,6 @@ export interface Grant {
     /**
      * The payment channel for the grant. This is useful to know how the grant will be sent.
      * The payment channel will be one of the following:
-     *
      * - dafpay_network: Grant will be sent to the DAFPay Network 501(c)(3) non-profit organization (EIN: 93-1372175). The DAFPay Network will then review and process the grant and send the funds to the intended recipient.
      * - direct: Grant will be sent directly to the intended recipient.
      */

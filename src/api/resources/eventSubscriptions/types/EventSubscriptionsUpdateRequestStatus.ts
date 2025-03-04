@@ -4,10 +4,9 @@
 
 /**
  * The status of the event subscription:
- *
- * - active: The event subscription is active and events will be delivered
- * - disabled: The event subscription is temporarily disabled and events will not be delivered
- * - deleted: The event subscription is permanently deleted and events will not be delivered
+ *   * active: The event subscription is active and events will be delivered
+ *   * disabled: The event subscription is temporarily disabled and events will not be delivered
+ *   * deleted: The event subscription is permanently deleted and events will not be delivered
  */
 export type EventSubscriptionsUpdateRequestStatus = "active" | "disabled" | "deleted";
 

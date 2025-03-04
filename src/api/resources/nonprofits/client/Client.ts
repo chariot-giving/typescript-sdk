@@ -33,7 +33,7 @@ export class Nonprofits {
      * Retrieves a nonprofit organization by an [Employee Identification Number](https://www.irs.gov/charities-non-profits/employer-identification-number) (EIN).
      * The EIN is a unique number that identifies the organization to the Internal Revenue Service (IRS).
      *
-     * In the case that the organization does not exist within Chariot's system, you can create one by calling the [Create Nonprofit](/api-reference/nonprofits/create) API endpoint.
+     * In the case that the organization does not exist within Chariot's system, you can create one by calling the [Create Nonprofit](/api/nonprofits/create) API endpoint.
      *
      * @param {string} ein - The unique federal employer identification number (EIN) of the nonprofit.
      *                       This value should be exactly 9 digits and should not contain any special characters such as dashes.
@@ -60,7 +60,7 @@ export class Nonprofits {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -204,7 +204,7 @@ export class Nonprofits {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -337,7 +337,7 @@ export class Nonprofits {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

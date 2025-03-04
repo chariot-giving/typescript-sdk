@@ -4,7 +4,7 @@
 
 import * as Chariot from "../../../index";
 
-export interface DaFsListResponse {
+export interface DonorAdvisedFundsListResponse {
     results?: Chariot.Daf[];
     /** A cursor token to use to retrieve the next page of results by making another API call to the same endpoint with the same parameters (only substituting the pageToken with this value). If specified, then more results exist on the server that were not returned, otherwise no more results exist on the server. */
     nextPageToken?: string;

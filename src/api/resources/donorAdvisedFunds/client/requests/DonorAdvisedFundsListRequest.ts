@@ -9,7 +9,7 @@
  * @example
  *     {}
  */
-export interface DaFsListRequest {
+export interface DonorAdvisedFundsListRequest {
     /**
      * If set to true, filters DAFs to only those that have a direct integration with Chariot.
      */

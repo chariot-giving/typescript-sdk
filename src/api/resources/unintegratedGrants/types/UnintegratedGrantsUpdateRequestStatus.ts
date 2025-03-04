@@ -4,9 +4,8 @@
 
 /**
  * The status of the grant:
- *
- * - Initiated: The grant has been initiated and is ready to be processed
- * - Completed: The grant has been completed
+ *   * Initiated: The grant has been initiated and is ready to be processed
+ *   * Completed: The grant has been completed
  */
 export type UnintegratedGrantsUpdateRequestStatus = "Initiated" | "Completed";
 

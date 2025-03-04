@@ -6,7 +6,6 @@ import * as serializers from "../../../../index";
 import * as Chariot from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { RecurringGrantsCreateRequestDonor } from "../../types/RecurringGrantsCreateRequestDonor";
-import { GrantAddress } from "../../../../types/GrantAddress";
 
 export const RecurringGrantsCreateRequest: core.serialization.Schema<
     serializers.RecurringGrantsCreateRequest.Raw,
@@ -16,7 +15,8 @@ export const RecurringGrantsCreateRequest: core.serialization.Schema<
     amount: core.serialization.number(),
     applicationFeeAmount: core.serialization.number().optional(),
     donor: RecurringGrantsCreateRequestDonor.optional(),
-    address: GrantAddress.optional(),
+    note: core.serialization.string().optional(),
+    designation: core.serialization.string().optional(),
 });
 
 export declare namespace RecurringGrantsCreateRequest {
@@ -25,6 +25,7 @@ export declare namespace RecurringGrantsCreateRequest {
         amount: number;
         applicationFeeAmount?: number | null;
         donor?: RecurringGrantsCreateRequestDonor.Raw | null;
-        address?: GrantAddress.Raw | null;
+        note?: string | null;
+        designation?: string | null;
     }
 }

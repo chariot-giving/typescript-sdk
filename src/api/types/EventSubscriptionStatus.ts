@@ -5,11 +5,10 @@
 /**
  * The status of the event subscription.
  * This indicates if we'll send notifications to this subscription
- *
- * - active: subscription is active and events will be delivered normally
- * - disabled: subscription is temporarily disabled and events will not be delivered
- * - deleted: subscription has been deleted and events will not be delivered
- * - requires_attention: subscription has been disabled due to delivery failures and events will not be delivered
+ *   * active: subscription is active and events will be delivered normally
+ *   * disabled: subscription is temporarily disabled and events will not be delivered
+ *   * deleted: subscription has been deleted and events will not be delivered
+ *   * requires_attention: subscription has been disabled due to delivery failures and events will not be delivered
  */
 export type EventSubscriptionStatus = "active" | "disabled" | "deleted" | "requires_attention";
 

@@ -17,7 +17,7 @@
 Retrieves a nonprofit organization by an [Employee Identification Number](https://www.irs.gov/charities-non-profits/employer-identification-number) (EIN).
 The EIN is a unique number that identifies the organization to the Internal Revenue Service (IRS).
 
-In the case that the organization does not exist within Chariot's system, you can create one by calling the [Create Nonprofit](/api-reference/nonprofits/create) API endpoint.
+In the case that the organization does not exist within Chariot's system, you can create one by calling the [Create Nonprofit](/api/nonprofits/create) API endpoint.
 
 </dd>
 </dl>
@@ -439,6 +439,7 @@ Error handling:
 - The amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants otherwise the request will return status `400 Bad Request`.
 - The amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status `400 Bad Request`.
 - The amount must be less than or equal to the user's DAF account balance otherwise the request will return status `400 Bad Request`.
+- Any inputs exceeding the maximum allowed length will be automatically truncated.
 </Warning>
 </dd>
 </dl>
@@ -721,6 +722,7 @@ Error handling:
 - The amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants otherwise the request will return status `400 Bad Request`.
 - The amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status `400 Bad Request`.
 - The amount must be less than or equal to the user's DAF account balance otherwise the request will return status `400 Bad Request`.
+- Any inputs exceeding the maximum allowed length will be automatically truncated unless otherwise stated.
 </Warning>
 </dd>
 </dl>
@@ -1048,9 +1050,9 @@ The format should be a v4 UUID according to RFC 4122.
 </dl>
 </details>
 
-## DaFs
+## DonorAdvisedFunds
 
-<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
+<details><summary><code>client.donorAdvisedFunds.<a href="/src/api/resources/donorAdvisedFunds/client/Client.ts">list</a>({ ...params }) -> core.Page<Chariot.Daf></code></summary>
 <dl>
 <dd>
 
@@ -1081,7 +1083,7 @@ If there are DAFs missing from the list, please contact support at support@givec
 <dd>
 
 ```typescript
-await client.daFs.list();
+await client.donorAdvisedFunds.list();
 ```
 
 </dd>
@@ -1097,7 +1099,7 @@ await client.daFs.list();
 <dl>
 <dd>
 
-**request:** `Chariot.DaFsListRequest`
+**request:** `Chariot.DonorAdvisedFundsListRequest`
 
 </dd>
 </dl>
@@ -1105,7 +1107,7 @@ await client.daFs.list();
 <dl>
 <dd>
 
-**requestOptions:** `DaFs.RequestOptions`
+**requestOptions:** `DonorAdvisedFunds.RequestOptions`
 
 </dd>
 </dl>
@@ -1116,7 +1118,7 @@ await client.daFs.list();
 </dl>
 </details>
 
-<details><summary><code>client.daFs.<a href="/src/api/resources/daFs/client/Client.ts">get</a>(id) -> Chariot.Daf</code></summary>
+<details><summary><code>client.donorAdvisedFunds.<a href="/src/api/resources/donorAdvisedFunds/client/Client.ts">get</a>(id) -> Chariot.Daf</code></summary>
 <dl>
 <dd>
 
@@ -1144,7 +1146,7 @@ Retrieve a DAF with a given ID.
 <dd>
 
 ```typescript
-await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
+await client.donorAdvisedFunds.get("f9e28217-e0f7-4a54-9764-d664ffb10722");
 ```
 
 </dd>
@@ -1171,7 +1173,7 @@ The format should be a v4 UUID according to RFC 4122.
 <dl>
 <dd>
 
-**requestOptions:** `DaFs.RequestOptions`
+**requestOptions:** `DonorAdvisedFunds.RequestOptions`
 
 </dd>
 </dl>
@@ -1565,74 +1567,6 @@ await client.eventSubscriptions.update("id");
 <dd>
 
 **requestOptions:** `EventSubscriptions.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Auth
-
-<details><summary><code>client.auth.<a href="/src/api/resources/auth/client/Client.ts">getToken</a>({ ...params }) -> Chariot.GetTokenResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Obtain an OAuth2 access token using client credentials
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.auth.getToken({
-    clientId: "client_id",
-    clientSecret: "client_secret",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Chariot.AuthGetTokenRequest`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Auth.RequestOptions`
 
 </dd>
 </dl>

@@ -14,6 +14,7 @@ export const UnintegratedGrant: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     userFriendlyId: core.serialization.string().optional(),
+    trackingId: core.serialization.string().optional(),
     workflowSessionId: core.serialization.string(),
     fundId: core.serialization.string(),
     createdAt: core.serialization.date().optional(),
@@ -34,6 +35,7 @@ export declare namespace UnintegratedGrant {
     interface Raw {
         id: string;
         userFriendlyId?: string | null;
+        trackingId?: string | null;
         workflowSessionId: string;
         fundId: string;
         createdAt?: string | null;

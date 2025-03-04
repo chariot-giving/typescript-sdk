@@ -14,7 +14,7 @@ import * as Chariot from "../../../../index";
 export interface RecurringGrantsCreateRequest {
     /**
      * The identifier of the donor's DAFpay Workflow Session.
-     * See [Integrating Connect](/integrating-connect) for how to get this value from the DAFpay client-side SDK.
+     * See [Capturing Grant Intents](/guides/dafpay/integrating-dafpay/integration#capturing-grant-intents) for how to get this value from the DAFpay `CHARIOT_SUCCESS` event.
      */
     workflowSessionId: string;
     /**
@@ -33,5 +33,12 @@ export interface RecurringGrantsCreateRequest {
      */
     applicationFeeAmount?: number;
     donor?: Chariot.RecurringGrantsCreateRequestDonor;
-    address?: Chariot.GrantAddress;
+    /** A note the donor wants to send to the nonprofit. Maximum length: 400 characters. */
+    note?: string;
+    /**
+     * The designation to include on the grant. If this is left blank, "Where needed most" will be used.
+     * Note that including a custom designation may cause the grant approval process to take longer.
+     * Designations over 100 characters will be truncated.
+     */
+    designation?: string;
 }

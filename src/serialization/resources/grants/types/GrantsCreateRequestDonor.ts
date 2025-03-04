@@ -5,6 +5,7 @@
 import * as serializers from "../../../index";
 import * as Chariot from "../../../../api/index";
 import * as core from "../../../../core";
+import { GrantAddress } from "../../../types/GrantAddress";
 
 export const GrantsCreateRequestDonor: core.serialization.ObjectSchema<
     serializers.GrantsCreateRequestDonor.Raw,
@@ -14,6 +15,7 @@ export const GrantsCreateRequestDonor: core.serialization.ObjectSchema<
     lastName: core.serialization.string().optional(),
     email: core.serialization.string().optional(),
     phone: core.serialization.string().optional(),
+    address: GrantAddress.optional(),
 });
 
 export declare namespace GrantsCreateRequestDonor {
@@ -22,5 +24,6 @@ export declare namespace GrantsCreateRequestDonor {
         lastName?: string | null;
         email?: string | null;
         phone?: string | null;
+        address?: GrantAddress.Raw | null;
     }
 }

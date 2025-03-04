@@ -4,17 +4,14 @@
 
 export interface ChariotEnvironmentUrls {
     api: string;
-    login: string;
 }
 
 export const ChariotEnvironment = {
     Production: {
         api: "https://api.givechariot.com",
-        login: "https://login.givechariot.com",
     },
     Sandbox: {
         api: "https://sandboxapi.givechariot.com",
-        login: "https://chariot-sandbox.us.auth0.com",
     },
 } as const;
 

@@ -7,15 +7,15 @@ import * as Chariot from "../../../../api/index";
 import * as core from "../../../../core";
 import { Daf } from "../../../types/Daf";
 
-export const DaFsListResponse: core.serialization.ObjectSchema<
-    serializers.DaFsListResponse.Raw,
-    Chariot.DaFsListResponse
+export const DonorAdvisedFundsListResponse: core.serialization.ObjectSchema<
+    serializers.DonorAdvisedFundsListResponse.Raw,
+    Chariot.DonorAdvisedFundsListResponse
 > = core.serialization.object({
     results: core.serialization.list(Daf).optional(),
     nextPageToken: core.serialization.string().optional(),
 });
 
-export declare namespace DaFsListResponse {
+export declare namespace DonorAdvisedFundsListResponse {
     interface Raw {
         results?: Daf.Raw[] | null;
         nextPageToken?: string | null;

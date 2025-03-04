@@ -15,6 +15,8 @@ export interface UnintegratedGrant {
     id: string;
     /** Often refered to as the "Chariot ID", this is the ID that will be included in the payment from the DAF provider. */
     userFriendlyId?: string;
+    /** The tracking ID for the unintegrated grant */
+    trackingId?: string;
     /** ID of the Connect Workflow Session associated with this grant */
     workflowSessionId: string;
     /** ID of the donor advised fund */
@@ -46,7 +48,6 @@ export interface UnintegratedGrant {
     /**
      * The payment channel for the unintegrated grant. This is useful to know how the grant will be sent.
      * The payment channel for unintegrated grants will always be:
-     *
      * - offline: Grant was initiated outside of Chariot so we're unable to confirm how the grant will be sent.
      */
     paymentChannel?: "offline";

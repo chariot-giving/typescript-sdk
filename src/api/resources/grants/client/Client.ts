@@ -69,7 +69,7 @@ export class Grants {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                    "X-Fern-SDK-Version": "1.1.0",
+                    "X-Fern-SDK-Version": "2.0.0a0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                     "x-chariot-api-key": chariotApiKey,
@@ -173,6 +173,7 @@ export class Grants {
      * - The amount must be in whole dollar increments (rounded to the nearest hundred) as currently DAFs only accept whole dollar grants otherwise the request will return status `400 Bad Request`.
      * - The amount must be greater than or equal to the minimum grant amount for the DAF otherwise the request will return status `400 Bad Request`.
      * - The amount must be less than or equal to the user's DAF account balance otherwise the request will return status `400 Bad Request`.
+     * - Any inputs exceeding the maximum allowed length will be automatically truncated.
      * </Warning>
      *
      * @param {Chariot.GrantsCreateRequest} request
@@ -207,7 +208,7 @@ export class Grants {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -351,7 +352,7 @@ export class Grants {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -480,7 +481,7 @@ export class Grants {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

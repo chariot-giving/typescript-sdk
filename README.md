@@ -1,7 +1,7 @@
 # Chariot TypeScript Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
-[![npm shield](https://img.shields.io/npm/v/chariot)](https://www.npmjs.com/package/chariot)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fchariot-giving%2Ftypescript-sdk)
+[![npm shield](https://img.shields.io/npm/v/@chariot-giving/typescript-sdk)](https://www.npmjs.com/package/@chariot-giving/typescript-sdk)
 
 The Chariot TypeScript library provides convenient access to the Chariot API from TypeScript.
 
@@ -18,10 +18,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { ChariotClient } from "@chariot-giving/typescript-sdk";
 
-const client = new ChariotClient({ 
-    clientId: "YOUR_CLIENT_ID",
-    clientSecret: "YOUR_CLIENT_SECRET",
-});
+const client = new ChariotClient({ token: "YOUR_TOKEN" });
 await client.nonprofits.create({
     user: {
         email: "ben.give@co.com",
@@ -70,7 +67,7 @@ can simply loop over the items:
 ```ts
 const result = await client.events.list();
 for await (const event of result) {
-  console.log(event);
+    console.log(event);
 }
 ```
 
@@ -79,7 +76,7 @@ You can also iterate page-by-page:
 ```ts
 let page = await client.events.list();
 for (const event of page.data) {
-  console.log(event);
+    console.log(event);
 }
 ```
 
@@ -87,8 +84,8 @@ or manually:
 
 ```ts
 while (page.hasNextPage()) {
-  page = page.getNextPage();
-  // ...
+    page = page.getNextPage();
+    // ...
 }
 ```
 
@@ -102,9 +99,9 @@ retry limit (default: 2).
 
 A request is deemed retriable when any of the following HTTP status codes is returned:
 
-- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
-- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
-- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+-   [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+-   [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+-   [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
 
 Use the `maxRetries` request option to configure this behavior.
 
@@ -141,12 +138,12 @@ controller.abort(); // aborts the request
 The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK works in the following
 runtimes:
 
-- Node.js 18+
-- Vercel
-- Cloudflare Workers
-- Deno v1.25+
-- Bun 1.0+
-- React Native
+-   Node.js 18+
+-   Vercel
+-   Cloudflare Workers
+-   Deno v1.25+
+-   Bun 1.0+
+-   React Native
 
 ### Customizing Fetch Client
 
@@ -154,7 +151,7 @@ The SDK provides a way for your to customize the underlying HTTP client / Fetch 
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { ChariotClient } from "chariot";
+import { ChariotClient } from "@chariot-giving/typescript-sdk";
 
 const client = new ChariotClient({
     ...

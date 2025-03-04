@@ -9,7 +9,7 @@ import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
-export declare namespace DaFs {
+export declare namespace DonorAdvisedFunds {
     interface Options {
         environment?: core.Supplier<environments.ChariotEnvironment | environments.ChariotEnvironmentUrls>;
         token?: core.Supplier<core.BearerToken | undefined>;
@@ -26,8 +26,8 @@ export declare namespace DaFs {
     }
 }
 
-export class DaFs {
-    constructor(protected readonly _options: DaFs.Options = {}) {}
+export class DonorAdvisedFunds {
+    constructor(protected readonly _options: DonorAdvisedFunds.Options = {}) {}
 
     /**
      * Returns a list of all Donor Advised Funds within Chariot's system. This API allows for paginating over many results.
@@ -36,20 +36,22 @@ export class DaFs {
      * If there are DAFs missing from the list, please contact support at support@givechariot.com.
      * </Note>
      *
-     * @param {Chariot.DaFsListRequest} request
-     * @param {DaFs.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Chariot.DonorAdvisedFundsListRequest} request
+     * @param {DonorAdvisedFunds.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
      * @throws {@link Chariot.InternalServerError}
      *
      * @example
-     *     await client.daFs.list()
+     *     await client.donorAdvisedFunds.list()
      */
     public async list(
-        request: Chariot.DaFsListRequest = {},
-        requestOptions?: DaFs.RequestOptions
+        request: Chariot.DonorAdvisedFundsListRequest = {},
+        requestOptions?: DonorAdvisedFunds.RequestOptions
     ): Promise<core.Page<Chariot.Daf>> {
-        const list = async (request: Chariot.DaFsListRequest): Promise<Chariot.DaFsListResponse> => {
+        const list = async (
+            request: Chariot.DonorAdvisedFundsListRequest
+        ): Promise<Chariot.DonorAdvisedFundsListResponse> => {
             const { supportedOnly, query, pageLimit, pageToken } = request;
             const _queryParams: Record<string, string | string[] | object | object[]> = {};
             if (supportedOnly != null) {
@@ -75,7 +77,7 @@ export class DaFs {
                     Authorization: await this._getAuthorizationHeader(),
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                    "X-Fern-SDK-Version": "1.1.0",
+                    "X-Fern-SDK-Version": "2.0.0a0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -87,7 +89,7 @@ export class DaFs {
                 abortSignal: requestOptions?.abortSignal,
             });
             if (_response.ok) {
-                return serializers.DaFsListResponse.parseOrThrow(_response.body, {
+                return serializers.DonorAdvisedFundsListResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -138,7 +140,7 @@ export class DaFs {
                     });
             }
         };
-        return new core.Pageable<Chariot.DaFsListResponse, Chariot.Daf>({
+        return new core.Pageable<Chariot.DonorAdvisedFundsListResponse, Chariot.Daf>({
             response: await list(request),
             hasNextPage: (response) => response?.nextPageToken != null,
             getItems: (response) => response?.results ?? [],
@@ -153,16 +155,16 @@ export class DaFs {
      *
      * @param {string} id - The unique id of the DAF.
      *                      The format should be a v4 UUID according to RFC 4122.
-     * @param {DaFs.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {DonorAdvisedFunds.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Chariot.BadRequestError}
      * @throws {@link Chariot.NotFoundError}
      * @throws {@link Chariot.InternalServerError}
      *
      * @example
-     *     await client.daFs.get("f9e28217-e0f7-4a54-9764-d664ffb10722")
+     *     await client.donorAdvisedFunds.get("f9e28217-e0f7-4a54-9764-d664ffb10722")
      */
-    public async get(id: string, requestOptions?: DaFs.RequestOptions): Promise<Chariot.Daf> {
+    public async get(id: string, requestOptions?: DonorAdvisedFunds.RequestOptions): Promise<Chariot.Daf> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 ((await core.Supplier.get(this._options.environment)) ?? environments.ChariotEnvironment.Production)
@@ -174,7 +176,7 @@ export class DaFs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "@chariot-giving/typescript-sdk",
-                "X-Fern-SDK-Version": "1.1.0",
+                "X-Fern-SDK-Version": "2.0.0a0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
